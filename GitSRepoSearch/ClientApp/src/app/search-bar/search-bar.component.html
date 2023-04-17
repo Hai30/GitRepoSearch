@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-xs-12">
+    <form>
+      <div class="row">
+        <div class="col-sm-5 form-group">
+          <label for="name">Repository Name</label>
+          <input type="text" class="form-control" placeholder="Search repositories" [(ngModel)]="keyword" name="searchQuery">
+          <p *ngIf="keyword == ''"
+             [ngStyle]="{color: 'red'}">Please Enter Repository Name and Click Search for Results</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <br>
+          <button (click)="searchRepositories()" type="submit" class="btn btn-primary" style="margin-right: 8px;">Search</button>
+          <!--<button class="btn btn-success" type="submit" style="margin-right: 8px;" (click)="onAddItem()">Add</button> -->
+          <button class="btn btn-danger" type="button" style="margin-right: 8px;">Delete</button>
+          <button (click)="clearRepositories()" class="btn btn-primary" type="button">Clear</button>
+        </div>
+      </div>
+    </form>
+    <hr />
+
+    <div class="row">
+      <div class="col-md-4" *ngFor="let repo of results; let i=index">
+        <div class="card">
+          <img src="{{ repo.owner.avatar_url }}" class="card-img-top" alt="{{ repo.name }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ repo.name }}</h5>
+            <button class="btn btn-primary" (click)="bookmarkRepository(repo)">Bookmark</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
