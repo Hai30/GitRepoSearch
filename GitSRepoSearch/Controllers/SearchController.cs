@@ -13,7 +13,6 @@ namespace git_repo_search.Controllers
 {
     [Route("api/search")]
     [ApiController]
-    [Authorize]
     public class SearchController : ControllerBase
     {
         private readonly HttpClient _httpClient;
@@ -26,6 +25,8 @@ namespace git_repo_search.Controllers
         }
 
         [HttpGet("{query}")]
+        [Authorize]
+
         public async Task<ActionResult<IEnumerable<Repository>>> Get(string query)
         {
             try

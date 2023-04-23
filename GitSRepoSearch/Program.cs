@@ -14,6 +14,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         options.Authority = "https://dev-tktqz5b3v2pkj4un.us.auth0.com/";
         options.Audience = "https://search-repo";
     });
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAnyOrigin",
