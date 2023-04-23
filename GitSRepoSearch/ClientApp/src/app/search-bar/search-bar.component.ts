@@ -42,13 +42,22 @@ export class SearchBarComponent implements OnInit {
   }
 
   bookmarkRepository(repository: any) {
-    this.http.post<any>('http://localhost:5132/api/search/bookmarks', repository).subscribe(res => {
-      this.bookmarkService.addBookmark(repository);
-      console.log('Repository bookmarked');
-    }, error => console.error(error));
-    console.log(this.bookmarksArray)
+    if (this.bookmarkService.isBookmarked(repository)) {
+      console.log('Repository already bookmarked');
+      return;
+    }
 
+    this.http.post<any>('http://localhost:5132/api/search/bookmarks', repository).subscribe(
+      res => {
+        this.bookmarkService.addBookmark(repository);
+        console.log('Repository bookmarked');
+      },
+      error => console.error(error)
+    );
+
+    console.log(this.bookmarksArray);
   }
+
   clearRepositories() {
     this.results = [];
     this.keyword = '';
